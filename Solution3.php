@@ -3,7 +3,8 @@
 
 class SolutionsFlags
 {
-    public const A = [1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2];
+    public const A = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1];
+//    public const A = [1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2];
 
 
  //   public const A = [1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2, 1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2];
@@ -31,10 +32,10 @@ class SolutionsFlags
 
         $pics = $this->getPics($heights);
         $pics = $this->setLengths($pics);
-//        print_r($pics);
-//
-//        var_dump($this->minDiffBetweenPicks);
-//        var_dump($this->maxDiffBetweenPicks);
+        print_r($pics);
+
+        var_dump($this->minDiffBetweenPicks);
+        var_dump($this->maxDiffBetweenPicks);
         $result = $this->findMaxFlagCount($pics);
 
         var_dump($result);
@@ -76,13 +77,12 @@ class SolutionsFlags
 
     private function findMaxFlagCount(array $pics)
     {
+        $this->maxDiffBetweenPicks = count($pics);
 
         if ($this->maxDiffBetweenPicks == $this->minDiffBetweenPicks && $this->maxDiffBetweenPicks <= count($pics)){
             return $this->maxDiffBetweenPicks;
         }elseif ($this->minDiffBetweenPicks == count($pics)){
             return $this->minDiffBetweenPicks;
-        }elseif ($this->maxDiffBetweenPicks > count($pics)){
-            $this->maxDiffBetweenPicks = count($pics);
         }
 
 
@@ -125,8 +125,6 @@ class SolutionsFlags
             $pics[$index] = $prevIndex-$index;
             if ($prevIndex-$index < $this->minDiffBetweenPicks && $prevIndex-$index != 0){
                 $this->minDiffBetweenPicks =$prevIndex-$index ;
-            }elseif ($prevIndex-$index > $this->maxDiffBetweenPicks) {
-                $this->maxDiffBetweenPicks =$prevIndex-$index ;
             }
 
             $prevIndex = $index;

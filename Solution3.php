@@ -3,7 +3,7 @@
 
 class SolutionsFlags
 {
-    public const A = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1];
+    public const A = [1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1];
 //    public const A = [1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2];
 
 
@@ -13,11 +13,6 @@ class SolutionsFlags
      * @var int
      */
     public $minDiffBetweenPicks;
-
-    /**
-     * @var int
-     */
-    public $maxDiffBetweenPicks = 0;
 
     public $maxFlagCount;
     /**
@@ -34,8 +29,8 @@ class SolutionsFlags
         $pics = $this->setLengths($pics);
         print_r($pics);
 
-        var_dump($this->minDiffBetweenPicks);
-        var_dump($this->maxDiffBetweenPicks);
+//        var_dump($this->minDiffBetweenPicks);
+
         $result = $this->findMaxFlagCount($pics);
 
         var_dump($result);
@@ -77,22 +72,17 @@ class SolutionsFlags
 
     private function findMaxFlagCount(array $pics)
     {
-        $this->maxDiffBetweenPicks = count($pics);
-
-        if ($this->maxDiffBetweenPicks == $this->minDiffBetweenPicks && $this->maxDiffBetweenPicks <= count($pics)){
-            return $this->maxDiffBetweenPicks;
-        }elseif ($this->minDiffBetweenPicks == count($pics)){
-            return $this->minDiffBetweenPicks;
+        $maxDiffBetweenPicks = count($pics);
+        if ($maxDiffBetweenPicks == $this->minDiffBetweenPicks){
+            return $maxDiffBetweenPicks;
         }
-
 
         $maxCountOfFlags = $this->minDiffBetweenPicks;
 
 
-        for($flagsCountVariant = $this->minDiffBetweenPicks; $flagsCountVariant <= $this->maxDiffBetweenPicks; $flagsCountVariant++){
+        for($flagsCountVariant = $this->minDiffBetweenPicks; $flagsCountVariant <= $maxDiffBetweenPicks; $flagsCountVariant++){
 
             $currentCounter = 1;
-
             foreach ($pics as $picLength){
                 if ($currentCounter > $flagsCountVariant){
                     continue;
@@ -107,6 +97,7 @@ class SolutionsFlags
             if ($maxCountOfFlags < $currentCounter){
                 $maxCountOfFlags = $currentCounter;
             }
+
 
         }
 

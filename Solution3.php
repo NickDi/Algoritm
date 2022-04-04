@@ -3,7 +3,7 @@
 
 class SolutionsFlags
 {
-    public const A = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    public const A = [1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1];
 //    public const A = [1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2];
 
 
@@ -80,7 +80,7 @@ class SolutionsFlags
         $maxCountOfFlags = $this->minDiffBetweenPicks;
 
 
-        for($flagsCountVariant = $this->minDiffBetweenPicks; $flagsCountVariant <= $maxDiffBetweenPicks; $flagsCountVariant++){
+        for($flagsCountVariant = $this->minDiffBetweenPicks; $flagsCountVariant <=  $this->maxFlagCount; $flagsCountVariant++){
 
             $currentCounter = 1;
             foreach ($pics as $picLength){

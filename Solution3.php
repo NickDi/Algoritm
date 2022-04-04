@@ -3,7 +3,7 @@
 
 class SolutionsFlags
 {
-    public const A = [1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1];
+    public const A = [1, 2];
 //    public const A = [1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2];
 
 
@@ -21,19 +21,21 @@ class SolutionsFlags
      */
     public function solution(array $heights): void
     {
+        if (count($heights) < 3){
+            print_r(0);
+            return;
+        }
+
         $this->maxFlagCount = round(sqrt(count($heights)),0,PHP_ROUND_HALF_DOWN);
-//        $this->minDiffBetweenPicks = count($heights);
         $this->minDiffBetweenPicks =$this->maxFlagCount;
 
         $pics = $this->getPics($heights);
         $pics = $this->setLengths($pics);
         print_r($pics);
-
 //        var_dump($this->minDiffBetweenPicks);
-
         $result = $this->findMaxFlagCount($pics);
 
-        var_dump($result);
+        print_r($result);
     }
 
     /**
@@ -48,7 +50,7 @@ class SolutionsFlags
             $lastIndexPic => true
         ];
 
-        for ($indexPoint = 1; $indexPoint <= $lastIndexPic; $indexPoint++) {
+        for ($indexPoint = 1; $indexPoint < $lastIndexPic; $indexPoint++) {
             if (true === $this->isPic($heights, $indexPoint)) {
                 unset($pics[$indexPoint-1], $pics[$indexPoint+1]);
 
